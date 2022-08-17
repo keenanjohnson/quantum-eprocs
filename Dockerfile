@@ -5,13 +5,6 @@ MAINTAINER quindar@audacy.space
 LABEL vendor="Audacy"
 
 
-# run system update & install utils
-RUN yum -y update --setopt=tsflags=nodocs   && \
-	yum -y install git wget nano curl make dos2unix
-
-##############################################################################
-
-
 ####
 # From Stack overflow:
 # https://stackoverflow.com/questions/70963985/error-failed-to-download-metadata-for-repo-appstream-cannot-prepare-internal
@@ -19,6 +12,12 @@ RUN yum -y update --setopt=tsflags=nodocs   && \
 RUN cd /etc/yum.repos.d/
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
 RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
+# run system update & install utils
+RUN yum -y update --setopt=tsflags=nodocs   && \
+	yum -y install git wget nano curl make dos2unix
+
+##############################################################################
 	
 #**** install netdata ****
 # https://github.com/firehol/netdata/wiki/Installation
