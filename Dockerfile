@@ -50,7 +50,7 @@ RUN yum -y update --setopt=tsflags=nodocs   && \
 #
 
 # Add python27 Keenan
-RUN yum -y install python26
+RUN yum -y install python27
 
 RUN yum install -y epel-release && \
 	yum install -y nginx && \
@@ -69,7 +69,7 @@ COPY nginx/server.key /etc/ssl/server.key
 
 RUN yum install -y gcc-c++    && \
 	curl --silent --location https://rpm.nodesource.com/setup_8.x | bash - && \
-	yum -y install nodejs  && \
+	yum -y install nodejs --skip-broken && \
 	npm install -g bower && \
 	npm install -g gulp  && \
 	npm install -g mean-cli && \
