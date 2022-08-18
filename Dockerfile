@@ -50,7 +50,7 @@ RUN yum -y update --setopt=tsflags=nodocs   && \
 #
 
 # Add python27 Keenan
-RUN yum -y install python27
+RUN yum -y install python26
 
 RUN yum install -y epel-release && \
 	yum install -y nginx && \
