@@ -49,6 +49,9 @@ RUN yum -y update --setopt=tsflags=nodocs   && \
 # nginx -s reload
 #
 
+# Add python27 Keenan
+RUN yum -y install python27
+
 RUN yum install -y epel-release && \
 	yum install -y nginx && \
 	mkdir -p /etc/ssl
