@@ -15,7 +15,7 @@ RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|
 
 # run system update & install utils
 RUN yum -y update --setopt=tsflags=nodocs   && \
-	yum -y install git wget nano curl make dos2unix
+	yum -y install git wget nano curl make dos2unix gcc
 
 ##############################################################################
 	
@@ -67,10 +67,17 @@ COPY nginx/server.key /etc/ssl/server.key
 # where $APP is the main file name (e.g. server.js) or can be specified at runtime
 # if additional options to the --watch flag are desired, add a config.json file to the build (tbd)
 
-RUN yum install -y gcc-c++    && \
-	curl --silent --location https://rpm.nodesource.com/setup_8.x | bash - && \
-	yum -y install nodejs --skip-broken && \
-	npm install -g bower && \
+RUN yum install -y gcc-c++
+
+RUN (curl -sL https://rpm.nodesource.com/setup_18.x | bash -) \
+  && yum clean all -y \
+  && yum update -y \
+  && yum install -y nodejs \
+  && yum autoremove -y \
+  && yum clean all -y \
+  && npm install npm --global
+
+RUN npm install -g bower && \
 	npm install -g gulp  && \
 	npm install -g mean-cli && \
 	npm install -g pm2
