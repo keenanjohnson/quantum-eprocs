@@ -127,6 +127,6 @@ ENV ENVIRONMENT ${ENVIRONMENT}
 # the last command can't exit, or the container will shutdown
 
 EXPOSE 80 443
-CMD /usr/sbin/nginx && (pm2 start ecosystem.config.js --env ${ENVIRONMENT} --no-daemon &) && \
-	/usr/sbin/netdata -D -s /host -p 19999
-	
+CMD /usr/sbin/nginx && (pm2 start ecosystem.config.js --env ${ENVIRONMENT} --no-daemon &)
+
+CMD sleep infinity
