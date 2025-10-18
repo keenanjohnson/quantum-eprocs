@@ -33,7 +33,33 @@ To stop:
 docker compose down
 ```
 
-### How to Use Quantum
+### First Steps
+
+Once the application is running:
+
+1. **Access the Dashboard** - Navigate to `http://localhost:3000/dashboard`
+2. **Open the Configuration Menu** - Click the sidebar toggle button on the right edge of the screen (arrow icon)
+3. **Upload a Procedure** - Click "Upload Procedure" and select an Excel file from the `testfiles/` directory
+   - Try: `1.0 - Test Mission - Getting Started.xlsx`
+   - Filename format: `index - eventname - title.xlsx`
+4. **View the Procedure** - Click the search icon to preview the procedure
+5. **Start a Procedure** - Click the play button to begin executing a procedure instance
+
+## Screenshots
+
+### Dashboard View
+![Dashboard](docs/screenshots/dashboard.png)
+*The main dashboard showing uploaded procedures with running and archived instances*
+
+### Upload Procedure
+![Upload Dialog](docs/screenshots/upload-dialog.png)
+*Configuration menu with Upload Procedure option*
+
+### Procedure Execution
+![Running Procedure](docs/screenshots/running-procedure.png)
+*Live procedure execution with step-by-step instructions and role assignments*
+
+## How to Use Quantum
 Please check out the [Usage Guide](https://github.com/AudacySpace/quantum/wiki/Usage-Guide) to learn about navigating around Quantum application. For installation on your local machine, check out the pre-requisites and steps [here](https://github.com/AudacySpace/quantum/blob/master/CONTRIBUTING.md#contributing-to-the-quantum-code)
 
 ## Contributing
