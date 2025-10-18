@@ -9,7 +9,31 @@ Audacy's vision is to make mission operation accessible to anyone who is pursuin
 
 You can use Quantum for handling procedures in your own mission operations environment, deployed on your own metal, customized to suit your mission needs. Then give back and contribute to the development community on GitHub.
 
-## How to Use Quantum
+## Quick Start
+
+### Using Docker Compose (Recommended)
+The easiest way to get Quantum running locally:
+
+```bash
+# Install dependencies locally first
+npm install
+
+# Start MongoDB and Quantum app
+docker compose up -d
+
+# View logs
+docker compose logs -f
+
+# Access the application
+# Open http://localhost:3000/dashboard in your browser
+```
+
+To stop:
+```bash
+docker compose down
+```
+
+### How to Use Quantum
 Please check out the [Usage Guide](https://github.com/AudacySpace/quantum/wiki/Usage-Guide) to learn about navigating around Quantum application. For installation on your local machine, check out the pre-requisites and steps [here](https://github.com/AudacySpace/quantum/blob/master/CONTRIBUTING.md#contributing-to-the-quantum-code)
 
 ## Contributing

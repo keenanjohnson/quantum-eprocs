@@ -1,20 +1,11 @@
 # Quantum Dockerfile
 
-FROM centos:latest
-MAINTAINER quindar@audacy.space
+FROM rockylinux:8
+LABEL maintainer="quindar@audacy.space"
 LABEL vendor="Audacy"
 
-
-####
-# From Stack overflow:
-# https://stackoverflow.com/questions/70963985/error-failed-to-download-metadata-for-repo-appstream-cannot-prepare-internal
-####
-RUN cd /etc/yum.repos.d/
-RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
-RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
-
 # run system update & install utils
-RUN yum -y update --setopt=tsflags=nodocs   && \
+RUN yum -y update --setopt=tsflags=nodocs && \
 	yum -y install git wget nano curl make dos2unix gcc
 
 ##############################################################################
@@ -127,6 +118,4 @@ ENV ENVIRONMENT ${ENVIRONMENT}
 # the last command can't exit, or the container will shutdown
 
 EXPOSE 80 443
-CMD /usr/sbin/nginx && (pm2 start ecosystem.config.js --env ${ENVIRONMENT} --no-daemon &)
-
-CMD sleep infinity
+CMD /usr/sbin/nginx && pm2-runtime start ecosystem.config.js --env ${ENVIRONMENT}

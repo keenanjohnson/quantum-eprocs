@@ -1,0 +1,45 @@
+services:
+  mongodb:
+    image: mongo:4.4
+    container_name: quantum-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - quantum-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/quindar --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  quantum-app:
+    build: .
+    container_name: quantum-app
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3000:3000"
+    volumes:
+      - .:/node
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=mongodb://mongodb:27017/quindar
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - quantum-network
+    cap_add:
+      - SYS_PTRACE
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  quantum-network:
+    driver: bridge

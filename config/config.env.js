@@ -16,7 +16,7 @@ module.exports = function(){
 			    'clientSecret'     : '',
 			    'callbackURL'      : ''
 			},
-			'databaseURL' : 'mongodb://localhost:27017/quindar',
+			'databaseURL' : process.env.DATABASE_URL || 'mongodb://localhost:27017/quindar',
 			'databaseOpts' : { useMongoClient : true }
         };
 	} else {
